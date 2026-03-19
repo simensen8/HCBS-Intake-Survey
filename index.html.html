@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parker Compass — HCBS Intake Discovery Survey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --poppy: #C94A2B;
+    --poppy-hover: #A83A1F;
+    --poppy-light: #FDF1EE;
+    --poppy-border: #E8C0B0;
+    --poppy-dark: #7A2A14;
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --text-hint: #9A9A9A;
+    --bg: #F7F5F2;
+    --surface: #FFFFFF;
+    --border: #E2DFDA;
+    --border-strong: #C8C4BE;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* ── Page header ── */
+  .page-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+  .page-header-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-mark {
+    width: 38px;
+    height: 38px;
+    background: var(--poppy);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-mark svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .header-text-wrap { flex: 1; min-width: 0; }
+  .header-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+  .header-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 1px;
+  }
+  .header-prog {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .header-prog-pct {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--poppy);
+  }
+  .header-prog-lbl {
+    font-size: 11px;
+    color: var(--text-hint);
+    margin-top: 1px;
+  }
+
+  /* Progress bar (below header) */
+  .prog-bar-outer {
+    height: 3px;
+    background: var(--border);
+    position: sticky;
+    top: 79px;
+    z-index: 99;
+  }
+  .prog-bar-fill {
+    height: 3px;
+    background: var(--poppy);
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* ── Main layout ── */
+  .main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 32px 24px 0;
+  }
+
+  /* ── Intro banner ── */
+  .intro-banner {
+    background: var(--poppy-light);
+    border: 1px solid var(--poppy-border);
+    border-radius: var(--radius-lg);
+    padding: 18px 22px;
+    margin-bottom: 32px;
+  }
+  .intro-banner p {
+    font-size: 13.5px;
+    color: #5C2010;
+    line-height: 1.7;
+  }
+  .intro-banner strong { font-weight: 500; color: var(--poppy-dark); }
+
+  /* ── Section ── */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 28px 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--poppy);
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .section-hint {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+    line-height: 1.5;
+  }
+
+  /* ── Question ── */
+  .q {
+    margin-bottom: 24px;
+  }
+  .q:last-child { margin-bottom: 0; }
+
+  .q-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    line-height: 1.45;
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+  .required-dot {
+    color: var(--poppy);
+    font-size: 16px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .q-hint {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.55;
+    font-style: italic;
+    background: #F7F5F2;
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    border-left: 3px solid var(--poppy-border);
+  }
+
+  /* ── Form controls ── */
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    background: var(--surface);
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 38px;
+    cursor: pointer;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--poppy);
+    box-shadow: 0 0 0 3px rgba(201, 74, 43, 0.1);
+  }
+  input.error, select.error, textarea.error {
+    border-color: #E02020;
+    box-shadow: 0 0 0 3px rgba(224, 32, 32, 0.08);
+  }
+  textarea {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.6;
+  }
+  ::placeholder { color: var(--text-hint); }
+
+  /* ── Option cards (radio/checkbox) ── */
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .opt-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: border-color 0.13s, background 0.13s;
+    user-select: none;
+  }
+  .opt-label:hover {
+    border-color: var(--poppy-border);
+    background: var(--poppy-light);
+  }
+  .opt-label.selected {
+    border-color: var(--poppy);
+    background: var(--poppy-light);
+  }
+  .opt-label.error-highlight {
+    border-color: #E02020;
+  }
+  .opt-input {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    accent-color: var(--poppy);
+    cursor: pointer;
+  }
+  .opt-text {
+    font-size: 13.5px;
+    color: var(--text-primary);
+    line-height: 1.45;
+  }
+
+  /* ── Scale buttons ── */
+  .scale-container { }
+  .scale-btns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .scale-btn {
+    width: 52px;
+    height: 52px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.13s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .scale-btn:hover {
+    border-color: var(--poppy);
+    color: var(--poppy);
+    background: var(--poppy-light);
+  }
+  .scale-btn.selected {
+    background: var(--poppy);
+    border-color: var(--poppy);
+    color: white;
+  }
+  .scale-btn.error-highlight {
+    border-color: #E02020;
+  }
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    color: var(--text-hint);
+    padding: 0 2px;
+  }
+
+  /* ── Error message ── */
+  .field-error {
+    font-size: 12px;
+    color: #C00;
+    margin-top: 5px;
+    display: none;
+  }
+  .field-error.show { display: block; }
+
+  /* ── Submit ── */
+  .submit-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .submit-note {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 18px;
+    line-height: 1.6;
+  }
+  .submit-btn {
+    background: var(--poppy);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: var(--radius-md);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    letter-spacing: 0.01em;
+    width: 100%;
+  }
+  .submit-btn:hover { background: var(--poppy-hover); }
+  .submit-btn:active { transform: scale(0.99); }
+  .submit-btn:disabled { opacity: 0.6; cursor: default; }
+
+  /* ── Validation summary ── */
+  .validation-summary {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #991B1B;
+    display: none;
+    line-height: 1.6;
+  }
+  .validation-summary.show { display: block; }
+
+  /* ── Success screen ── */
+  #success-screen {
+    display: none;
+    max-width: 680px;
+    margin: 60px auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    background: #ECFDF5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+  .success-icon svg {
+    width: 30px;
+    height: 30px;
+    stroke: #059669;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .success-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+  .success-body {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    max-width: 680px;
+    margin: 32px auto 0;
+    padding: 0 24px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-hint);
+    line-height: 1.7;
+  }
+  .footer a { color: var(--poppy); text-decoration: none; }
+
+  /* ── Submitting state ── */
+  .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Responsive ── */
+  @media (max-width: 520px) {
+    .main { padding: 20px 16px 0; }
+    .section { padding: 22px 18px 18px; }
+    .scale-btn { width: 46px; height: 46px; font-size: 14px; }
+    .page-header-inner { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Sticky header -->
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24"><polyline points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+    </div>
+    <div class="header-text-wrap">
+      <div class="header-title">Parker Compass</div>
+      <div class="header-sub">HCBS Intake Discovery — Phase I</div>
+    </div>
+    <div class="header-prog">
+      <div class="header-prog-pct" id="prog-pct">0%</div>
+      <div class="header-prog-lbl" id="prog-lbl">0 of 22</div>
+    </div>
+  </div>
+</header>
+<div class="prog-bar-outer"><div class="prog-bar-fill" id="prog-fill"></div></div>
+
+<!-- Form -->
+<div id="survey-form">
+  <div class="main">
+
+    <div class="intro-banner">
+      <p>This survey supports a cross-service-line review of current intake practices as part of the <strong>Parker Compass</strong> strategic initiative. There are no right or wrong answers — we need an honest picture of how intake works today. Your responses are informational only and will be used to guide organizational planning, not to evaluate individual performance. <strong>Estimated time: 20–25 minutes.</strong> All fields marked with a <span style="color:var(--poppy);font-weight:500;">•</span> are required.</p>
+    </div>
+
+    <!-- SECTION 1 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div>
+          <div class="section-title">About you & your program</div>
+        </div>
+      </div>
+
+      <div class="q" id="q-name-wrap">
+        <div class="q-label">What is your name? <span class="required-dot">•</span></div>
+        <input type="text" id="q-name" placeholder="Your full name">
+        <div class="field-error" id="err-name">Please enter your name.</div>
+      </div>
+
+      <div class="q" id="q-sl-wrap">
+        <div class="q-label">Which service line do you lead? <span class="required-dot">•</span></div>
+        <select id="q-sl">
+          <option value="">Select your service line...</option>
+          <option>Adult Day Care</option>
+          <option>Senior Care Options — Care Management</option>
+          <option>Senior Care Options — Psychotherapy</option>
+          <option>Navigator Services</option>
+          <option>Rehabilitation Services</option>
+          <option>Health &amp; Wellness</option>
+        </select>
+        <div class="field-error" id="err-sl">Please select your service line.</div>
+      </div>
+
+      <div class="q" id="q-vol-wrap">
+        <div class="q-label">Approximately how many new referrals does your program receive per month? <span class="required-dot">•</span></div>
+        <select id="q-vol">
+          <option value="">Select a range...</option>
+          <option>Fewer than 10</option>
+          <option>10–25</option>
+          <option>26–50</option>
+          <option>51–100</option>
+          <option>More than 100</option>
+          <option>Highly variable — hard to estimate</option>
+        </select>
+        <div class="field-error" id="err-vol">Please select a referral volume.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">How many staff members are involved in your intake process in any capacity? <span class="required-dot">•</span></div>
+        <div class="q-hint">Include anyone who touches a referral, does screening, assessment, scheduling, or authorization.</div>
+        <input type="number" id="q-staff" min="0" placeholder="Number of staff">
+        <div class="field-error" id="err-staff">Please enter a number.</div>
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div>
+          <div class="section-title">Intake process — steps & roles</div>
+          <div class="section-hint">Map what actually happens during intake, in order and by role. Describe your most common path.</div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">Where does intake formally begin in your program? <span class="required-dot">•</span></div>
+        <div class="options" id="q-start" data-type="radio">
+          <!-- built by JS -->
+        </div>
+        <div class="field-error" id="err-start">Please select an option.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">Where does intake formally end in your program? <span class="required-dot">•</span></div>
+        <div class="options" id="q-end" data-type="radio"></div>
+        <div class="field-error" id="err-end">Please select an option.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">How are referrals most commonly received? <span style="font-weight:400;color:var(--text-secondary);font-size:13px;">(Select all that apply)</span> <span class="required-dot">•</span></div>
+        <div class="options" id="q-receipt" data-type="check"></div>
+        <div class="field-error" id="err-receipt">Please select at least one option.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">Who is the first person to receive or review a new referral? <span class="required-dot">•</span></div>
+        <div class="options" id="q-first" data-type="radio"></div>
+        <div class="field-error" id="err-first">Please select an option.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">How long does a typical intake take from referral received to first service? <span class="required-dot">•</span></div>
+        <div class="options" id="q-speed" data-type="radio"></div>
+        <div class="field-error" id="err-speed">Please select an option.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">Describe the steps in your intake process, in order. Include who is responsible for each step. <span class="required-dot">•</span></div>
+        <div class="q-hint">It's okay if it's rough — we're looking for the real process, not a polished version. Example: Step 1 — Referral received by intake coordinator. Step 2 — Coordinator calls referral source to confirm information...</div>
+        <textarea id="q-steps" placeholder="Step 1 — ...&#10;Step 2 — ...&#10;Step 3 — ..."></textarea>
+        <div class="field-error" id="err-steps">Please describe your intake steps.</div>
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div>
+          <div class="section-title">Technology & systems</div>
+          <div class="section-hint">List every system used during intake — including informal ones like spreadsheets, texts, or personal calendars.</div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">Which systems does your team use during intake? <span style="font-weight:400;color:var(--text-secondary);font-size:13px;">(Select all that apply)</span> <span class="required-dot">•</span></div>
+        <div class="options" id="q-sys" data-type="check"></div>
+        <div class="field-error" id="err-sys">Please select at least one option.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">What is your primary system for intake documentation? <span class="required-dot">•</span></div>
+        <input type="text" id="q-primary-sys" placeholder="e.g., TheraNest, MyJunna, Excel, paper forms...">
+        <div class="field-error" id="err-primary-sys">Please enter your primary system.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">How well does your current technology support your intake process? <span class="required-dot">•</span></div>
+        <div class="scale-container">
+          <div class="scale-btns" id="scale-tech"></div>
+          <div class="scale-labels"><span>Does not support it at all</span><span>Fully supports it</span></div>
+        </div>
+        <div class="field-error" id="err-scale-tech">Please select a rating.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">If your technology worked perfectly, where would your intake process still break down? <span class="required-dot">•</span></div>
+        <div class="q-hint">This is one of the most important questions — please answer as specifically as possible.</div>
+        <textarea id="q-nontech" placeholder="Even with perfect technology, we'd still struggle with..."></textarea>
+        <div class="field-error" id="err-nontech">Please answer this question.</div>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div>
+          <div class="section-title">Pain points & workarounds</div>
+          <div class="section-hint">This section is about the hard parts — what goes wrong, what your team has figured out on their own. Please be candid. This is used to improve systems, not evaluate performance.</div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">At what stage of intake do problems most frequently occur? <span style="font-weight:400;color:var(--text-secondary);font-size:13px;">(Select all that apply)</span> <span class="required-dot">•</span></div>
+        <div class="options" id="q-problems" data-type="check"></div>
+        <div class="field-error" id="err-problems">Please select at least one option.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">How often do referrals arrive with insufficient information to proceed? <span class="required-dot">•</span></div>
+        <div class="options" id="q-incomplete" data-type="radio"></div>
+        <div class="field-error" id="err-incomplete">Please select an option.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">What workarounds has your team developed that are not in any written protocol? <span class="required-dot">•</span></div>
+        <div class="q-hint">Examples: a shared tracking spreadsheet, a group text thread, a personal checklist, a verbal handoff routine. We want to know what's actually working informally so we can consider formalizing the best of it.</div>
+        <textarea id="q-workarounds" placeholder="Describe your team's informal practices..."></textarea>
+        <div class="field-error" id="err-workarounds">Please describe any workarounds, even if just "none."</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">What is the single most important thing you would fix in your intake process? <span class="required-dot">•</span></div>
+        <textarea id="q-fix" placeholder="If I could change one thing..."></textarea>
+        <div class="field-error" id="err-fix">Please answer this question.</div>
+      </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div>
+          <div class="section-title">Participant experience</div>
+          <div class="section-hint">Focus on what the person being served actually encounters during intake — not what the process is designed to do, but what they actually experience.</div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">How quickly does your program make first contact with a new referral? <span class="required-dot">•</span></div>
+        <div class="options" id="q-contact" data-type="radio"></div>
+        <div class="field-error" id="err-contact">Please select an option.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">Does your intake process gather the participant's personal goals, preferences, and life context — beyond clinical need? <span class="required-dot">•</span></div>
+        <div class="options" id="q-goals" data-type="radio"></div>
+        <div class="field-error" id="err-goals">Please select an option.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">How well does your current intake process support a person-centered approach? <span class="required-dot">•</span></div>
+        <div class="scale-container">
+          <div class="scale-btns" id="scale-pc"></div>
+          <div class="scale-labels"><span>Not at all person-centered</span><span>Fully person-centered</span></div>
+        </div>
+        <div class="field-error" id="err-scale-pc">Please select a rating.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">If a participant were describing their intake experience to a friend, what do you think they would say? <span class="required-dot">•</span></div>
+        <div class="q-hint">Be as honest as possible — this is one of the most valuable questions in the form.</div>
+        <textarea id="q-participant" placeholder="They would probably say..."></textarea>
+        <div class="field-error" id="err-participant">Please answer this question.</div>
+      </div>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <div>
+          <div class="section-title">Looking ahead</div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">How mature is your current intake process overall? <span class="required-dot">•</span></div>
+        <div class="scale-container">
+          <div class="scale-btns" id="scale-maturity"></div>
+          <div class="scale-labels"><span>Mostly in people's heads</span><span>Fully documented & continuously improved</span></div>
+        </div>
+        <div class="field-error" id="err-scale-maturity">Please select a rating.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">Which elements of a centralized intake hub would be most valuable to your service line? <span style="font-weight:400;color:var(--text-secondary);font-size:13px;">(Select all that apply)</span> <span class="required-dot">•</span></div>
+        <div class="options" id="q-hub" data-type="check"></div>
+        <div class="field-error" id="err-hub">Please select at least one option.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">What would need to be true for your intake process to be considered excellent — not just adequate? <span class="required-dot">•</span></div>
+        <textarea id="q-excellent" placeholder="Excellence would look like..."></textarea>
+        <div class="field-error" id="err-excellent">Please answer this question.</div>
+      </div>
+
+      <div class="q">
+        <div class="q-label">Is there anything else you'd like to share that this survey didn't capture?</div>
+        <textarea id="q-other" placeholder="Anything else on your mind..."></textarea>
+      </div>
+    </div>
+
+    <!-- Validation summary -->
+    <div class="validation-summary" id="validation-summary">
+      Please complete all required fields before submitting. Scroll up to review any highlighted questions.
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-section">
+      <p class="submit-note">Once submitted, your response will be recorded automatically. You will not need to send anything additional.</p>
+      <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">Submit my response</button>
+    </div>
+
+    <div class="footer">
+      Parker Senior Care Options &nbsp;·&nbsp; Parker Compass Phase I Discovery<br>
+      Questions? Contact <a href="mailto:jon@parkerlife.org">Jon</a> directly.
+    </div>
+
+  </div><!-- .main -->
+</div><!-- #survey-form -->
+
+<!-- Success screen -->
+<div id="success-screen">
+  <div class="success-icon">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div class="success-title">Response submitted</div>
+  <p class="success-body">Thank you. Your intake data has been recorded and will feed directly into the Parker Compass model. Jon will follow up as Phase I discovery wraps up.</p>
+</div>
+
+<script>
+// ─── Option definitions ───────────────────────────────────────────────────
+const OPTIONS = {
+  'q-start': [
+    'When a referral is received',
+    'When we confirm the person is eligible',
+    'When we make first contact with the participant',
+    'When an assessment is scheduled',
+    'There is no clearly defined start point',
+    'Other (please describe in the steps question below)'
+  ],
+  'q-end': [
+    'When eligibility is confirmed',
+    'When the participant is assigned to a staff member',
+    'When the care plan or service plan is completed',
+    'When the first service is delivered',
+    'When authorization is obtained',
+    'There is no clearly defined end point',
+    'Other (please describe in the steps question below)'
+  ],
+  'q-receipt': [
+    'Phone call',
+    'Fax',
+    'Email',
+    'Internal cross-referral from another Parker program',
+    'Online portal or web form',
+    'Walk-in',
+    'Hospital or facility discharge planner',
+    'EHR or care management system notification',
+    'Other'
+  ],
+  'q-first': [
+    'A dedicated intake coordinator',
+    'The Director or program manager',
+    'A care manager or clinician',
+    'Administrative staff',
+    'It varies — no consistent first point of contact',
+    'Other'
+  ],
+  'q-speed': [
+    'Same day',
+    '1–3 days',
+    '4–7 days',
+    '1–2 weeks',
+    '2–4 weeks',
+    'More than 4 weeks',
+    'Highly variable — depends on the case'
+  ],
+  'q-sys': [
+    'Electronic Medical Record (EMR)',
+    'Care management platform (e.g., MyJunna, Aaniie)',
+    'Excel or Google Sheets',
+    'Shared drive or SharePoint',
+    'Paper forms or printed checklists',
+    'Outlook / email used as a tracking tool',
+    'Personal notes or notebooks',
+    'Phone or text messaging',
+    'Fax',
+    'Other'
+  ],
+  'q-problems': [
+    'Referral receipt — incomplete or missing information',
+    'Initial contact — unable to reach the participant',
+    'Eligibility determination — unclear or disputed criteria',
+    'Assessment — scheduling delays or incomplete data',
+    'Internal handoff — information lost or miscommunicated',
+    'Assignment or matching — capacity or fit issues',
+    'Authorization — payer delays or denials',
+    'Service start — logistical or staffing barriers',
+    'Documentation — falls behind or is inconsistent',
+    'Other'
+  ],
+  'q-incomplete': [
+    'Rarely (less than 10% of the time)',
+    'Sometimes (10–25%)',
+    'Often (26–50%)',
+    'Very often (more than 50%)',
+    'Nearly always'
+  ],
+  'q-contact': [
+    'Same day',
+    'Within 24 hours',
+    'Within 2–3 business days',
+    'Within one week',
+    'It varies significantly',
+    'We do not have a standard for this'
+  ],
+  'q-goals': [
+    'Yes — this is a formal part of our assessment',
+    'Sometimes — it depends on the staff member',
+    'Rarely — our intake is mostly clinical or functional',
+    'No — we focus on eligibility and clinical criteria only',
+    'Other'
+  ],
+  'q-hub': [
+    'Single intake form shared across service lines',
+    'Shared client record visible to all relevant service lines',
+    'Automated cross-referral suggestions',
+    'Centralized intake coordinator role',
+    'Standardized needs assessment tool',
+    'Care alignment dashboard for overlapping clients'
+  ]
+};
+
+// ─── Build option lists ───────────────────────────────────────────────────
+function buildOptions() {
+  Object.entries(OPTIONS).forEach(([id, opts]) => {
+    const container = document.getElementById(id);
+    if (!container) return;
+    const isCheck = container.dataset.type === 'check';
+    opts.forEach(opt => {
+      const label = document.createElement('label');
+      label.className = 'opt-label';
+      const input = document.createElement('input');
+      input.type = isCheck ? 'checkbox' : 'radio';
+      input.name = id;
+      input.value = opt;
+      input.className = 'opt-input';
+      input.addEventListener('change', () => {
+        if (!isCheck) {
+          container.querySelectorAll('.opt-label').forEach(l => l.classList.remove('selected'));
+        }
+        label.classList.toggle('selected', input.checked);
+        updateProgress();
+        clearError(id);
+      });
+      const span = document.createElement('span');
+      span.className = 'opt-text';
+      span.textContent = opt;
+      label.appendChild(input);
+      label.appendChild(span);
+      container.appendChild(label);
+    });
+  });
+}
+
+// ─── Build scale buttons ──────────────────────────────────────────────────
+function buildScale(id, loLabel, hiLabel) {
+  const container = document.getElementById(id);
+  if (!container) return;
+  for (let i = 1; i <= 5; i++) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'scale-btn';
+    btn.textContent = i;
+    btn.dataset.scaleId = id;
+    btn.dataset.val = i;
+    btn.addEventListener('click', () => {
+      container.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      updateProgress();
+      clearError('scale-' + id.replace('scale-', ''));
+    });
+    container.appendChild(btn);
+  }
+}
+
+// ─── Progress tracking ────────────────────────────────────────────────────
+const TOTAL = 22;
+
+function countAnswered() {
+  let n = 0;
+  const t = id => { const el = document.getElementById(id); return el && el.value && el.value.trim() !== ''; };
+  if (t('q-name')) n++;
+  if (t('q-sl')) n++;
+  if (t('q-vol')) n++;
+  if (t('q-staff')) n++;
+  ['q-start','q-end','q-first','q-speed','q-incomplete','q-contact','q-goals'].forEach(id => {
+    if (document.querySelector('#' + id + ' input:checked')) n++;
+  });
+  ['q-receipt','q-sys','q-problems','q-hub'].forEach(id => {
+    if (document.querySelectorAll('#' + id + ' input:checked').length > 0) n++;
+  });
+  ['scale-tech','scale-pc','scale-maturity'].forEach(id => {
+    if (document.querySelector('#' + id + ' .scale-btn.selected')) n++;
+  });
+  ['q-primary-sys','q-steps','q-nontech','q-workarounds','q-fix','q-participant','q-excellent'].forEach(id => {
+    if (t(id)) n++;
+  });
+  return Math.min(n, TOTAL);
+}
+
+function updateProgress() {
+  const n = countAnswered();
+  const pct = Math.round((n / TOTAL) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-lbl').textContent = n + ' of ' + TOTAL;
+}
+
+// ─── Error helpers ────────────────────────────────────────────────────────
+function showError(id, msg) {
+  const err = document.getElementById('err-' + id);
+  if (err) { err.textContent = msg || err.textContent; err.classList.add('show'); }
+  const field = document.getElementById(id) || document.getElementById('q-' + id);
+  if (field) field.classList.add('error');
+  // highlight option cards
+  const opts = document.getElementById('q-' + id) || document.getElementById(id);
+  if (opts && opts.classList.contains('options')) {
+    opts.querySelectorAll('.opt-label').forEach(l => l.classList.add('error-highlight'));
+  }
+}
+function clearError(id) {
+  const err = document.getElementById('err-' + id);
+  if (err) err.classList.remove('show');
+  const field = document.getElementById(id) || document.getElementById('q-' + id);
+  if (field) field.classList.remove('error');
+  const opts = document.getElementById('q-' + id) || document.getElementById(id);
+  if (opts && opts.classList.contains('options')) {
+    opts.querySelectorAll('.opt-label').forEach(l => l.classList.remove('error-highlight'));
+  }
+}
+
+// Inline clear on change
+['q-name','q-sl','q-vol','q-staff','q-primary-sys','q-steps','q-nontech','q-workarounds','q-fix','q-participant','q-excellent'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', () => { clearError(id); updateProgress(); });
+});
+
+// ─── Validation ───────────────────────────────────────────────────────────
+function validate() {
+  let valid = true;
+  let firstError = null;
+
+  function req(id, msg) {
+    const el = document.getElementById(id);
+    if (!el || !el.value || !el.value.trim()) {
+      showError(id, msg);
+      if (!firstError) firstError = el;
+      valid = false;
+    }
+  }
+  function reqRadio(id) {
+    if (!document.querySelector('#' + id + ' input:checked')) {
+      showError(id);
+      const el = document.getElementById(id);
+      if (!firstError) firstError = el;
+      valid = false;
+    }
+  }
+  function reqCheck(id) {
+    if (document.querySelectorAll('#' + id + ' input:checked').length === 0) {
+      showError(id);
+      const el = document.getElementById(id);
+      if (!firstError) firstError = el;
+      valid = false;
+    }
+  }
+  function reqScale(id) {
+    if (!document.querySelector('#' + id + ' .scale-btn.selected')) {
+      const err = document.getElementById('err-' + id);
+      if (err) err.classList.add('show');
+      const el = document.getElementById(id);
+      if (!firstError) firstError = el;
+      valid = false;
+    }
+  }
+
+  req('q-name', 'Please enter your name.');
+  req('q-sl', 'Please select your service line.');
+  req('q-vol', 'Please select a referral volume.');
+  req('q-staff', 'Please enter a number.');
+  reqRadio('q-start');
+  reqRadio('q-end');
+  reqCheck('q-receipt');
+  reqRadio('q-first');
+  reqRadio('q-speed');
+  req('q-steps', 'Please describe your intake steps.');
+  reqCheck('q-sys');
+  req('q-primary-sys', 'Please enter your primary system.');
+  reqScale('scale-tech');
+  req('q-nontech', 'Please answer this question.');
+  reqCheck('q-problems');
+  reqRadio('q-incomplete');
+  req('q-workarounds', 'Please describe any workarounds, even if just "none."');
+  req('q-fix', 'Please answer this question.');
+  reqRadio('q-contact');
+  reqRadio('q-goals');
+  reqScale('scale-pc');
+  req('q-participant', 'Please answer this question.');
+  reqScale('scale-maturity');
+  reqCheck('q-hub');
+  req('q-excellent', 'Please answer this question.');
+
+  if (!valid && firstError) {
+    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById('validation-summary').classList.add('show');
+  } else {
+    document.getElementById('validation-summary').classList.remove('show');
+  }
+  return valid;
+}
+
+// ─── Collect data ─────────────────────────────────────────────────────────
+function getVal(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function getChecked(id) { return Array.from(document.querySelectorAll('#' + id + ' input:checked')).map(i => i.value).join('; '); }
+function getRadio(id) { const el = document.querySelector('#' + id + ' input:checked'); return el ? el.value : ''; }
+function getScale(id) { const el = document.querySelector('#' + id + ' .scale-btn.selected'); return el ? el.dataset.val : ''; }
+
+function collectData() {
+  return {
+    Timestamp: new Date().toISOString(),
+    Name: getVal('q-name'),
+    'Service Line': getVal('q-sl'),
+    'Monthly Referral Volume': getVal('q-vol'),
+    'Staff in Intake': getVal('q-staff'),
+    'Intake Start': getRadio('q-start'),
+    'Intake End': getRadio('q-end'),
+    'Receipt Methods': getChecked('q-receipt'),
+    'First Receiver': getRadio('q-first'),
+    'Typical Speed': getRadio('q-speed'),
+    'Intake Steps': getVal('q-steps'),
+    'Systems Used': getChecked('q-sys'),
+    'Primary System': getVal('q-primary-sys'),
+    'Tech Support Rating': getScale('scale-tech'),
+    'Non-Tech Breakdown': getVal('q-nontech'),
+    'Problem Stages': getChecked('q-problems'),
+    'Incomplete Referral Frequency': getRadio('q-incomplete'),
+    'Workarounds': getVal('q-workarounds'),
+    'Top Fix': getVal('q-fix'),
+    'First Contact Speed': getRadio('q-contact'),
+    'Goals Gathered': getRadio('q-goals'),
+    'Person-Centered Rating': getScale('scale-pc'),
+    'Participant View': getVal('q-participant'),
+    'Process Maturity Rating': getScale('scale-maturity'),
+    'Hub Feature Priorities': getChecked('q-hub'),
+    'Excellence Definition': getVal('q-excellent'),
+    'Additional Notes': getVal('q-other')
+  };
+}
+
+// ─── Submit ───────────────────────────────────────────────────────────────
+async function handleSubmit() {
+  if (!validate()) return;
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Submitting...';
+
+  const data = collectData();
+
+  // ── REPLACE THIS URL with your Google Apps Script web app URL ──
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2P5deCyXHOlolNBah65l5nL-m4K9Eh9q6OWz_HnowkFHqExK9b_LPD6SEt3kkCLPUkg/exec';
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch (e) {
+    // no-cors means we can't read the response — silently continue
+  }
+
+  // Show success regardless (no-cors fetch doesn't give us a readable response)
+  document.getElementById('survey-form').style.display = 'none';
+  document.getElementById('success-screen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────
+buildOptions();
+buildScale('scale-tech');
+buildScale('scale-pc');
+buildScale('scale-maturity');
+
+// Add change listeners to selects/inputs for progress
+document.getElementById('q-sl').addEventListener('change', updateProgress);
+document.getElementById('q-vol').addEventListener('change', updateProgress);
+</script>
+</body>
+</html>
